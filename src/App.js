@@ -1,24 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from 'react';
+
+import Events from './components/Events/Events';
+import MainHeader from './components/MainHeader/MainHeader';
 
 function App() {
+  const [cartItems, setCartItems] = useState([]);
+
+  function addItemHandler(item) {
+    setCartItems((prevItems) => [...prevItems, item]);
+  }
+
+  function removeItemHandler(itemId) {
+    setCartItems((prevItems) => prevItems.filter((item) => item.id !== itemId));
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <MainHeader cartItems={cartItems} />
+      <main>
+        <Events
+          onAddItemToCart={addItemHandler}
+          onRemoveItemFromCart={removeItemHandler}
+          cartItems={cartItems}
+        />
+      </main>
+    </>
   );
 }
 
