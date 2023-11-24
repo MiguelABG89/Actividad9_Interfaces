@@ -2,6 +2,7 @@ import { useState } from 'react';
 
 import Events from './components/Events/Events';
 import MainHeader from './components/MainHeader/MainHeader';
+import { CardContext } from './components/Context/AppContext';
 
 function App() {
   const [cartItems, setCartItems] = useState([]);
@@ -14,9 +15,18 @@ function App() {
     setCartItems((prevItems) => prevItems.filter((item) => item.id !== itemId));
   }
 
+  const CardCtxValue={
+    onAddItemToCart: addItemHandler,
+    onRemoveItemFromCart: removeItemHandler,
+    cartItems: cartItems,
+  }
+
   return (
     <>
-      <MainHeader cartItems={cartItems} />
+      <CardContext.Provider value={{CardCtxValue}}>
+        <MainHeader/>
+      </CardContext.Provider>
+      
       <main>
         <Events
           onAddItemToCart={addItemHandler}

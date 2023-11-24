@@ -1,9 +1,10 @@
-import { useState } from 'react';
+import { useState,useContext } from 'react';
+import { CardContext, ItemsContext } from '../Context/AppContext';
 
 import Cart from '../Cart/Cart';
 import classes from './MainHeader.module.css';
 
-function MainHeader({ cartItems }) {
+function MainHeader() {
   const [modalIsOpen, setModalIsOpen] = useState();
 
   function openCartModalHandler() {
@@ -14,15 +15,24 @@ function MainHeader({ cartItems }) {
     setModalIsOpen(false);
   }
 
-  const numCartItems = cartItems.length;
+  const numCartItems = useContext(CardContext);
+
+  const ItemsCtxValue={
+    onCloseCard: closeCartModalHandler,
+    Items: numCartItems.cartItems,
+  }
 
   return (
     <>
       <header className={classes.header}>
         <h1>StateEvents Shop</h1>
-        <button onClick={openCartModalHandler}>Cart ({numCartItems})</button>
+        <button onClick={openCartModalHandler}>Cart ({numCartItems.cartItems})</button>
       </header>
-      {modalIsOpen && <Cart onClose={closeCartModalHandler} items={cartItems} />}
+      
+      <ItemsContext.Provider value={{ItemsCtxValue}}>
+        {modalIsOpen && <Cart/>}
+      </ItemsContext.Provider>
+      
     </>
   );
 }
