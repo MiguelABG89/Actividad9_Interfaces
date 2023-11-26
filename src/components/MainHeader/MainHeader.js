@@ -1,4 +1,4 @@
-import { useState,useContext } from 'react';
+import { useState, useContext } from 'react';
 import { CardContext, ItemsContext } from '../Context/AppContext';
 
 import Cart from '../Cart/Cart';
@@ -17,7 +17,7 @@ function MainHeader() {
 
   const numCartItems = useContext(CardContext);
 
-  const ItemsCtxValue={
+  const ItemsCtxValue = {
     onCloseCard: closeCartModalHandler,
     Items: numCartItems.cartItems,
   }
@@ -28,11 +28,11 @@ function MainHeader() {
         <h1>StateEvents Shop</h1>
         <button onClick={openCartModalHandler}>Cart ({numCartItems.cartItems})</button>
       </header>
-      
-      <ItemsContext.Provider value={{ItemsCtxValue}}>
-        {modalIsOpen && <Cart/>}
+
+      <ItemsContext.Provider value={{ ItemsCtxValue }}>
+        {modalIsOpen && <Cart />}
       </ItemsContext.Provider>
-      
+
     </>
   );
 }

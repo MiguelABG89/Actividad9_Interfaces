@@ -15,26 +15,18 @@ function App() {
     setCartItems((prevItems) => prevItems.filter((item) => item.id !== itemId));
   }
 
-  const CardCtxValue={
-    onAddItemToCart: addItemHandler,
-    onRemoveItemFromCart: removeItemHandler,
+  const CardCtxValue = {
     cartItems: cartItems,
+    onAddItemToCart: addItemHandler,
+    onRemoveItemFromCart: removeItemHandler
   }
 
   return (
-    <>
-      <CardContext.Provider value={{CardCtxValue}}>
-        <MainHeader/>
-      </CardContext.Provider>
-      
-      <main>
-        <Events
-          onAddItemToCart={addItemHandler}
-          onRemoveItemFromCart={removeItemHandler}
-          cartItems={cartItems}
-        />
-      </main>
-    </>
+    <CardContext.Provider value={{ CardCtxValue }}>
+      <MainHeader />
+      <Events />
+    </CardContext.Provider>
+
   );
 }
 

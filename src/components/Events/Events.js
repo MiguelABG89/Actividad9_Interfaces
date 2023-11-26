@@ -1,18 +1,27 @@
 import dummyEvents from '../../data/dummy-events';
 import EventItem from './EventItem';
 import classes from './Events.module.css';
+import { CardContext, EventContext } from '../Context/AppContext';
+import { useContext } from 'react';
 
-function Events({ onAddItemToCart, onRemoveItemFromCart, cartItems }) {
+function Events() {
+
+  const EventCtx = useContext(CardContext);
+
+
   return (
     <ul className={classes.events}>
       {dummyEvents.map((event) => (
-        <EventItem
-          key={event.id}
-          event={event}
-          isInCart={cartItems.some((item) => item.id === event.id)}
-          onAddToCart={() => onAddItemToCart(event)}
-          onRemoveFromCart={() => onRemoveItemFromCart(event.id)}
-        />
+
+        <EventContext.Provider value={{
+          key: event.id,
+          event: { event },
+          isInCart: EventCtx.cartItems.some((item) => item.id === event.id),
+          onAddToCart: EventCtx.onAddItemToCart(event),
+          onRemoveFromCart: EventCtx.onRemoveItemFromCart(event.id)
+        }}>
+          <EventItem />
+        </EventContext.Provider>
       ))}
     </ul>
   );
