@@ -18,13 +18,15 @@ function App() {
   const CardCtxValue = {
     cartItems: cartItems,
     onAddItemToCart: addItemHandler,
-    onRemoveItemFromCart: removeItemHandler
+    onRemoveItemFromCart: removeItemHandler,
   }
 
   return (
-    <CardContext.Provider value={{ CardCtxValue }}>
+    <CardContext.Provider value={CardCtxValue}>
       <MainHeader />
-      <Events />
+      <main>
+        <Events />
+      </main>
     </CardContext.Provider>
 
   );

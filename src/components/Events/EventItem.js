@@ -1,6 +1,7 @@
 import { EventContext } from '../Context/AppContext';
 import classes from './EventItem.module.css';
 import { useContext } from 'react';
+
 function EventItem() {
 
   const EventItemCtx = useContext(EventContext)

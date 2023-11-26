@@ -16,6 +16,7 @@ function MainHeader() {
   }
 
   const numCartItems = useContext(CardContext);
+  const numCartItemsLength = numCartItems.cartItems.length;
 
   const ItemsCtxValue = {
     onCloseCard: closeCartModalHandler,
@@ -26,10 +27,10 @@ function MainHeader() {
     <>
       <header className={classes.header}>
         <h1>StateEvents Shop</h1>
-        <button onClick={openCartModalHandler}>Cart ({numCartItems.cartItems})</button>
+        <button onClick={openCartModalHandler}>Cart ({numCartItemsLength})</button>
       </header>
 
-      <ItemsContext.Provider value={{ ItemsCtxValue }}>
+      <ItemsContext.Provider value={ ItemsCtxValue }>
         {modalIsOpen && <Cart />}
       </ItemsContext.Provider>
 

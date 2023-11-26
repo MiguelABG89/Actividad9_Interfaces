@@ -4,6 +4,7 @@ import classes from './Cart.module.css';
 import { useContext } from 'react';
 
 function Cart() {
+  
   const ItemCtx = useContext(ItemsContext)
 
   const total = ItemCtx.Items.reduce((prevVal, item) => prevVal + item.price, 0)
